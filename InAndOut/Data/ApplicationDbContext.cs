@@ -10,6 +10,10 @@ namespace InAndOut.Data
 
         }
 
-        public DbSet<Item> Item { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }
+
+//desde la consola de paquetes:
+//add-migration nombre    -> crea automaticamente una migracion con los cambios en la carpeta de modelos. 
+// update-database     -> modifica la db con las migraciones actuales. 
