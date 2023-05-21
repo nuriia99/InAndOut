@@ -37,19 +37,28 @@ namespace InAndOut.Controllers
 		}
 
 
-		//public IActionResult Update([FromUrl] int id)
-		//{
-		//	Expense expense = new Expense();
-		//	return View(expense);
-		//}
+		public IActionResult Update(int? id)
+		{
+			var obj = _db.Expenses.Find(id);
+			if(obj == null)
+			{
+				return NotFound();
+			}
+			return View(obj);
+		}
 
-		//[HttpPost]
-		//public IActionResult Update(Expense obj)
-		//{
-		//	_db.Update(obj);
-		//	_db.SaveChanges();
-		//	return RedirectToAction("Index");
-		//}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Update(Expense obj)
+		{
+			if(ModelState.IsValid)
+			{
+				_db.Update(obj);
+				_db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+			return View(obj);
+		}
 
 
 		public IActionResult Delete(int? id)
